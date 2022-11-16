@@ -1,0 +1,18 @@
+{% extends '@CoreShopFrontend/Mail/order-confirmation.html.twig' %}
+
+{% block mail %}
+    {{ parent() }}
+
+    {% if novalnet_comments is defined %}
+        <callout class="secondary">
+            <row>
+                <columns large="12">
+                    <p>
+                        <strong>Payment Details</strong><br/>
+                        {{ novalnet_comments|default('') | raw}}
+                    </p>
+                </columns>
+            </row>
+        </callout>
+    {% endif %}
+{% endblock %}

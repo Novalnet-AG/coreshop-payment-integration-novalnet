@@ -1,0 +1,136 @@
+parameters:
+    coreshop.form.type.gateway_config.validation_groups: [fotobuch]
+
+services:
+
+    # Novalnet global Config
+    NovalnetBundle\Form\Payment\NovalnetGlobalConfigType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_global_config }
+            - { name: form.type }
+
+    # Novalnet Credit card
+    NovalnetBundle\Form\Payment\NovalnetCcType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_cc }
+            - { name: form.type }
+
+    # Novalnet Sepa
+    NovalnetBundle\Form\Payment\NovalnetSepaType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_sepa }
+            - { name: form.type }
+
+    # Novalnet Invoice
+    NovalnetBundle\Form\Payment\NovalnetInvoiceType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_invoice }
+            - { name: form.type }
+
+    # Novalnet Prepayment
+    NovalnetBundle\Form\Payment\NovalnetPrepaymentType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_prepayment }
+            - { name: form.type }
+
+    # Novalnet Invoice Guarantee
+    NovalnetBundle\Form\Payment\NovalnetInvoiceGuaranteeType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_invoice_guarantee }
+            - { name: form.type }
+
+    # Novalnet Sepa Guarantee
+    NovalnetBundle\Form\Payment\NovalnetSepaGuaranteeType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_sepa_guarantee }
+            - { name: form.type }
+
+    # Novalnet Cashpayment
+    NovalnetBundle\Form\Payment\NovalnetCashpaymentType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_cashpayment }
+            - { name: form.type }
+
+    # Novalnet Paypal
+    NovalnetBundle\Form\Payment\NovalnetPaypalType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_paypal }
+            - { name: form.type }
+
+    # Novalnet Banktransfer
+    NovalnetBundle\Form\Payment\NovalnetBanktransferType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_banktransfer }
+            - { name: form.type }
+
+    # Novalnet Online Banktransfer
+    NovalnetBundle\Form\Payment\NovalnetOnlineBanktransferType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_online_banktransfer }
+            - { name: form.type }
+
+    # Novalnet Ideal
+    NovalnetBundle\Form\Payment\NovalnetIdealType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_ideal }
+            - { name: form.type }
+
+    # Novalnet Eps
+    NovalnetBundle\Form\Payment\NovalnetEpsType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_eps }
+            - { name: form.type }
+
+    # Novalnet Giropay
+    NovalnetBundle\Form\Payment\NovalnetGiropayType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_giropay }
+            - { name: form.type }
+
+    # Novalnet Przelewy
+    NovalnetBundle\Form\Payment\NovalnetPrzelewyType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_przelewy }
+            - { name: form.type }
+
+    # Novalnet Post Finance
+    NovalnetBundle\Form\Payment\NovalnetPostFinanceType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_post_finance }
+            - { name: form.type }
+
+    # Novalnet Post Finance card
+    NovalnetBundle\Form\Payment\NovalnetPostFinanceCardType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_post_finance_card }
+            - { name: form.type }
+
+    # Novalnet Multibanco
+    NovalnetBundle\Form\Payment\NovalnetMultibancoType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_multibanco }
+            - { name: form.type }
+
+    # Novalnet Bancontact
+    NovalnetBundle\Form\Payment\NovalnetBancontactType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_bancontact }
+            - { name: form.type }
+
+    # Novalnet Alipay
+    NovalnetBundle\Form\Payment\NovalnetAlipayType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_alipay }
+            - { name: form.type }
+
+    # Novalnet Trustly
+    NovalnetBundle\Form\Payment\NovalnetTrustlyType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_trustly }
+            - { name: form.type }
+
+    # Novalnet Wechatpay
+    NovalnetBundle\Form\Payment\NovalnetWechatpayType:
+        tags:
+            - { name: coreshop.gateway_configuration_type, type: novalnet_wechatpay }
+            - { name: form.type }

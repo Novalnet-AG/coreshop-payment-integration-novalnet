@@ -1,0 +1,65 @@
+core_shop_payment:
+    pimcore_admin:
+        js:
+            novalnet_global_config: /bundles/novalnet/pimcore/js/novalnet_global_config.js
+            novalnet_cc: /bundles/novalnet/pimcore/js/novalnet_cc.js
+            novalnet_sepa: /bundles/novalnet/pimcore/js/novalnet_sepa.js
+            novalnet_invoice: /bundles/novalnet/pimcore/js/novalnet_invoice.js
+            novalnet_prepayment: /bundles/novalnet/pimcore/js/novalnet_prepayment.js
+            novalnet_invoice_guarantee: /bundles/novalnet/pimcore/js/novalnet_invoice_guarantee.js
+            novalnet_sepa_guarantee: /bundles/novalnet/pimcore/js/novalnet_sepa_guarantee.js
+            novalnet_cashpayment: /bundles/novalnet/pimcore/js/novalnet_cashpayment.js
+            novalnet_paypal: /bundles/novalnet/pimcore/js/novalnet_paypal.js
+            novalnet_banktransfer: /bundles/novalnet/pimcore/js/novalnet_banktransfer.js
+            novalnet_online_banktransfer: /bundles/novalnet/pimcore/js/novalnet_online_banktransfer.js
+            novalnet_ideal: /bundles/novalnet/pimcore/js/novalnet_ideal.js
+            novalnet_eps: /bundles/novalnet/pimcore/js/novalnet_eps.js
+            novalnet_giropay: /bundles/novalnet/pimcore/js/novalnet_giropay.js
+            novalnet_przelewy: /bundles/novalnet/pimcore/js/novalnet_przelewy.js
+            novalnet_post_finance: /bundles/novalnet/pimcore/js/novalnet_post_finance.js
+            novalnet_post_finance_card: /bundles/novalnet/pimcore/js/novalnet_post_finance_card.js
+            novalnet_multibanco: /bundles/novalnet/pimcore/js/novalnet_multibanco.js
+            novalnet_bancontact: /bundles/novalnet/pimcore/js/novalnet_bancontact.js
+            novalnet_alipay: /bundles/novalnet/pimcore/js/novalnet_alipay.js
+            novalnet_trustly: /bundles/novalnet/pimcore/js/novalnet_trustly.js
+            novalnet_wechatpay: /bundles/novalnet/pimcore/js/novalnet_wechatpay.js
+
+core_shop_workflow:
+    state_machine:
+        coreshop_payment:
+            callbacks:
+                before:
+                    refund_payment_before:
+                        on: ['refund']
+                        do: ['@NovalnetBundle\Event\Payment\RefundBefore', 'refundBefore']
+                        args: ['object', 'object.getOrder()']
+
+                    cancel_payment_before:
+                        on: ['cancel']
+                        do: ['@NovalnetBundle\Event\Payment\CancelBefore', 'cancelBefore']
+                        args: ['object', 'object.getOrder()']
+
+                    complete_payment_before:
+                        on: ['complete']
+                        do: ['@NovalnetBundle\Event\Payment\CompleteBefore', 'completeBefore']
+                        args: ['object', 'object.getOrder()']
+
+            transitions:
+                process:
+                    from: [new, authorized]
+                    to: processing
+
+        coreshop_order:
+            callbacks:
+                before:
+                    cancel_order_before:
+                        on: ['cancel']
+                        do: ['@NovalnetBundle\Event\Order\CancelBefore', 'cancelBefore']
+                        args: ['object', 'event']
+
+core_shop_frontend:
+    controllers:
+        cart: NovalnetBundle\Controller\CartController
+        checkout: NovalnetBundle\Controller\CheckoutController
+        customer: NovalnetBundle\Controller\CustomerController
+        mail: NovalnetBundle\Controller\MailController

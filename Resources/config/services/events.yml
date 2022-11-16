@@ -1,0 +1,35 @@
+services:
+    _defaults:
+        public: true
+
+    # payment refund before
+    NovalnetBundle\Event\Payment\RefundBefore:
+        public: true
+        arguments:
+            - '@payum'
+
+    # payment cancel before
+    NovalnetBundle\Event\Payment\CancelBefore:
+        public: true
+        arguments:
+            - '@payum'
+
+    # payment complete before
+    NovalnetBundle\Event\Payment\CompleteBefore:
+        public: true
+        arguments:
+            - '@payum'
+
+    # order complete before
+    NovalnetBundle\Event\Order\CancelBefore:
+        public: true
+        arguments:
+            - '@payum'
+
+    # Payment provider display event
+    NovalnetBundle\Resolver\EventBasedPaymentProviderResolver:
+        decoration_priority: 6
+        decorates: CoreShop\Component\Payment\Resolver\PaymentProviderResolverInterface
+        arguments:
+            - '@NovalnetBundle\Resolver\EventBasedPaymentProviderResolver.inner'
+            - '@event_dispatcher'

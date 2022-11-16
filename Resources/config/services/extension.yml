@@ -1,0 +1,24 @@
+services:
+    _defaults:
+        public: true
+
+    # obtain token extension
+    NovalnetBundle\Extension\ObtainTokenExtension:
+        arguments:
+            - '@coreshop.repository.order'
+        tags:
+            - { name: payum.extension, all: true, prepend: true }
+
+    # update payment extension
+    NovalnetBundle\Extension\UpdatePaymentStateExtension:
+        arguments:
+            - '@CoreShop\Bundle\WorkflowBundle\Manager\StateMachineManagerInterface'
+        tags:
+            - { name: payum.extension, all: true, prepend: true }
+
+    # update order extension
+    NovalnetBundle\Extension\UpdateOrderStateExtension:
+        arguments:
+            - '@CoreShop\Bundle\WorkflowBundle\Manager\StateMachineManagerInterface'
+        tags:
+            - { name: payum.extension, all: true, prepend: true }

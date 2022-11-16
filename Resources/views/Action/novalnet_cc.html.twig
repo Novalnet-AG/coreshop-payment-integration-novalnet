@@ -1,0 +1,133 @@
+{% extends layout ?: "@CoreShopPayumBundle::layout.html.twig" %}
+
+{% block content %}
+    {{ parent() }}
+
+    <form action="{{ actionUrl|default('') }}" method="POST" id="novalnetCc_form" >
+        <div class="col-sm-10 card card-smart border-secondary">
+            <div class="card-header row" >
+                <div class="col-sm-3" >
+                    <h3 class="card-title">{{ novalnet_cc_payment_title|default('') }}</h3>
+                </div>
+                <div class="col-sm" style="padding:inherit;" >
+                    {% for logo in logos %}
+                        <img src="{{ logo.src }}" title="{{ logo.title }}" alt="{{ logo.alt }}" class="" width=""/>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <iframe id="novalnet_iframe" frameborder="0" scrolling="no" width="100%" ></iframe>
+
+                <br>
+                <div class="card card-smart">
+                    <ul>
+                        <li>{{ novalnet_cc_payment_instructions|default('') }}</li>
+                    </ul>
+                </div>
+
+                <input type="hidden" id="novalnet_cc_pan_hash" name="novalnet_cc_pan_hash"/>
+                <input type="hidden" id="novalnet_cc_unique_id" name="novalnet_cc_unique_id"/>
+                <input type="hidden" id="novalnet_cc_do_redirect" name="novalnet_cc_do_redirect"/>
+                <input type="hidden" id="nn_token_done" name="nn_token_done" value="1" />
+                <input type="hidden" id="nn_payment_form_data" value="{{ payment_form_data|default('') }}" />
+                <input type="hidden" id="nn_form_cancel_url" value="{{ cancel_url|default('') }}" />
+                <br>
+                <div class="text-right" >
+                    <button type="button" id="nn_cc_form_cancel" class="btn btn-secondary w-25">{{ novalnet_cancel_btn_label|default('') }}</button>
+                    <input type="hidden" id="novalnet_cancel_payment_alert" value="{{ novalnet_cancel_payment_alert|default('') }}" />
+                    <button type="submit" id="nn_cc_form_submit" value="submit" class="btn btn-success w-25" >{{ novalnet_submit_btn_label|default('') }}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+
+    <script src="https://cdn.novalnet.de/js/v2/NovalnetUtility.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(function() {
+            window.onload = function() {
+                let iframeData = {};
+                try {
+                    iframeData = JSON.parse($('#nn_payment_form_data').val());
+                } catch (e) {
+
+                }
+
+                NovalnetUtility.setClientKey("88fcbbceb1948c8ae106c3fe2ccffc12");
+                var configurationObject = {
+                    callback: {
+                        on_success: function (data) {
+                            $('#novalnet_cc_pan_hash').val(data.hash);
+                            $('#novalnet_cc_unique_id').val(data.unique_id);
+                            $('#novalnet_cc_do_redirect').val(data.do_redirect);
+                            $('#nn_cc_form_submit').click();
+                            return true;
+                        },
+                        on_error: function (data) {
+                            if ( undefined !== data.error_message ) {
+                                alert(data.error_message);
+                                return false;
+                            }
+                        },
+                        on_show_overlay:  function (data) {
+                            $('#novalnet_iframe').addClass("novalnet-challenge-window-overlay");
+                        },
+                        on_hide_overlay:  function (data) {
+                            $('#novalnet_iframe').removeClass("novalnet-challenge-window-overlay");
+                        }
+                    },
+                    iframe: {
+                        id: "novalnet_iframe",
+                        inline: iframeData.inline,
+                        style: iframeData.style,
+                        text: iframeData.text
+                    },
+                    customer: iframeData.customer,
+                    transaction: iframeData.transaction,
+                    custom: iframeData.custom
+                }
+
+                NovalnetUtility.createCreditCardForm(configurationObject);
+            }
+
+            $('#nn_cc_form_submit').on('click', function(event) {
+                if($('#novalnet_cc_pan_hash') != undefined && $('#novalnet_cc_pan_hash').val() == '')
+                {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    NovalnetUtility.getPanHash();
+                }
+            });
+
+            $('#nn_cc_form_cancel').on('click', function() {
+                var cancelUrl = $('#nn_form_cancel_url').val();
+                var alertText = $('#novalnet_cancel_payment_alert').val();
+
+
+                if (!cancelUrl) {
+                    cancelUrl = window.location.host;
+                }
+                if (!alertText) {
+                    alertText = "Do you really want to cancel the payment?";
+                }
+
+                var result = confirm(alertText);
+                if (result) {
+                    window.location.replace(cancelUrl);
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends '@CoreShopFrontend/Customer/order_detail.html.twig' %}
+
+{% block center %}
+    {{ parent() }}
+
+    {% if novalnet_comments is defined %}
+        <div class="row">
+            <div class="col-12 col-sm-8">
+                <div class="card card-smart">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            {{ 'Payment Details'|trans }}
+                        </h4>
+                    </div>
+                    <div class="card-body panel-payment-details">
+                        {{ novalnet_comments|default('') | raw}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

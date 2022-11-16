@@ -1,0 +1,157 @@
+services:
+    _defaults:
+        public: true
+
+    # Novalnet global Config
+    payum.novalnet_global_config_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetGatewayFactory]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_global_config }
+
+    # Novalnet Credit card
+    payum.novalnet_cc_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetCc]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_cc }
+
+    # Novalnet Sepa
+    payum.novalnet_sepa_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetSepa]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_sepa }
+
+    # Novalnet Invoice
+    payum.novalnet_invoice_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetInvoice]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_invoice }
+
+    # Novalnet Prepayment
+    payum.novalnet_prepayment_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetPrepayment]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_prepayment }
+
+    # Novalnet Invoice Guarantee
+    payum.novalnet_invoice_guarantee_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetInvoiceGuarantee]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_invoice_guarantee }
+
+    # Novalnet Sepa Guarantee
+    payum.novalnet_sepa_guarantee_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetSepaGuarantee]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_sepa_guarantee }
+
+    # Novalnet Cashpayment
+    payum.novalnet_cashpayment_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetCashpayment]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_cashpayment }
+
+    # Novalnet Paypal
+    payum.novalnet_paypal_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetPaypal]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_paypal }
+
+    # Novalnet Banktransfer
+    payum.novalnet_banktransfer_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetBanktransfer]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_banktransfer }
+
+    # Novalnet Online Banktransfer
+    payum.novalnet_online_banktransfer_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetOnlineBanktransfer]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_online_banktransfer }
+
+    # Novalnet Ideal
+    payum.novalnet_ideal_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetIdeal]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_ideal }
+
+    # Novalnet Eps
+    payum.novalnet_eps_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetEps]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_eps }
+
+    # Novalnet Giropay
+    payum.novalnet_giropay_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetGiropay]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_giropay }
+
+    # Novalnet Przelewy
+    payum.novalnet_przelewy_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetPrzelewy]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_przelewy }
+
+    # Novalnet Post Finance
+    payum.novalnet_post_finance_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetPostFinance]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_post_finance }
+
+    # Novalnet Post Finance Card
+    payum.novalnet_post_finance_card_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetPostFinanceCard]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_post_finance_card }
+
+    # Novalnet Multibanco
+    payum.novalnet_multibanco_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetMultibanco]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_multibanco }
+
+    # Novalnet Bancontact
+    payum.novalnet_bancontact_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetBancontact]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_bancontact }
+
+    # Novalnet Alipay
+    payum.novalnet_alipay_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetAlipay]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_alipay }
+
+    # Novalnet Trustly
+    payum.novalnet_trustly_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetTrustly]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_trustly }
+
+    # Novalnet Wechatpay
+    payum.novalnet_wechatpay_gateway_factory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [NovalnetBundle\Gateway\NovalnetWechatpay]
+        tags:
+            - {name: payum.gateway_factory_builder, factory: novalnet_wechatpay }

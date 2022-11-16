@@ -1,0 +1,53 @@
+imports:
+    - { resource: 'services/form.yml' }
+    - { resource: 'services/payment.yml' }
+    - { resource: 'services/extension.yml' }
+    - { resource: 'services/events.yml' }
+
+services:
+    _defaults:
+        public: true
+
+    # convert payment
+    NovalnetBundle\Action\ConvertPaymentAction:
+        tags:
+            - { name: payum.action, all: true, prepend: true }
+
+    # next route action
+    NovalnetBundle\Action\ResolveNextRouteAction:
+        tags:
+            - { name: payum.action, all: true, prepend: true }
+
+    # novalnet callback controller
+    NovalnetBundle\Controller\NovalnetCallbackController:
+        calls:
+            - method: setContainer
+              arguments: ['@service_container']
+
+    # novalnet globalconfig controller
+    NovalnetBundle\Controller\NovalnetGlobalConfigController:
+        calls:
+            - method: setContainer
+              arguments: ['@service_container']
+            - method: setHttpClient
+              arguments: ['@Symfony\Contracts\HttpClient\HttpClientInterface']
+
+    # novalnet helper
+    NovalnetBundle\Helper\NovalnetHelper:
+        public: true
+
+    # novalnet transaction model
+    NovalnetBundle\Model\NovalnetTransaction:
+        public: true
+
+    # novalnet callback model
+    NovalnetBundle\Model\NovalnetCallback:
+        public: true
+
+    # novalnet transaction interface
+    NovalnetBundle\Model\NovalnetTransactionInterface:
+        public: true
+
+    # novalnet callback interface
+    NovalnetBundle\Model\NovalnetCallbackInterface:
+        public: true

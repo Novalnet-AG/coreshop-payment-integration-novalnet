@@ -1,0 +1,38 @@
+{
+    "name": "novalnet/pimcore-coreshop",
+    "type": "pimcore-bundle",
+    "description": "Novalnet Payment bundle for pimcore-coreshop",
+    "version": "1.0.0",
+    "keywords": [
+        "coreshop",
+        "pimcore",
+        "payment",
+        "novalnet"
+    ],
+    "homepage": "https://www.novalnet.de/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Novalnet AG",
+            "homepage": "https://www.novalnet.de"
+        }
+    ],
+    "require": {
+        "php": ">=8.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {
+            "NovalnetBundle\\": ""
+        }
+    },
+    "extra": {
+        "pimcore": {
+            "bundles": [
+                "NovalnetBundle\\NovalnetBundle"
+            ]
+        }
+    }
+}

@@ -1,0 +1,95 @@
+{% extends layout ?: "@CoreShopPayumBundle::layout.html.twig" %}
+
+{% block content %}
+    {{ parent() }}
+
+    {% if error == true %}
+        <div class="coreshop-flash-message alert alert-danger" role="alert">
+            {{ errorMessage }}
+        </div>
+    {% endif %}
+
+    <form action="{{ actionUrl|default('') }}" method="POST" id="novalnet_invoice_guarantee_form" >
+        <div class="col-sm-10 card card-smart border-secondary">
+            <div class="card-header row" >
+                <div class="col-sm-3" >
+                    <h3 class="card-title">{{ invoice_guarantee_payment_title|default('') }}</h3>
+                </div>
+                <div class="col-sm" style="padding:inherit;" >
+                    {% for logo in logos %}
+                        <img src="{{ logo.src }}" title="{{ logo.title }}" alt="{{ logo.alt }}" class="" width=""/>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+
+                {% if canShowDob == true %}
+                    <div id="novalnet_invoice_guarantee_dob" >
+                        <label for="novalnet_invoice_guarantee_dob" class="required">{{ guarantee_dob_label|default('') }}</label>
+                        <input type="text"
+                            id="novalnet_invoice_guarantee_dob"
+                            name="novalnet_invoice_guarantee_dob"
+                            required="required"
+                            class="form-control"
+                            autocomplete="off"
+                            placeholder="{{ dob_placeholder|default('') }}"
+                            maxlength="10"
+                            minlength="10"
+                            onkeydown = "return NovalnetUtility.isNumericBirthdate(this, event)" >
+                        <br>
+                    </div>
+                {% endif %}
+
+                <div class="card card-smart">
+                    <ul>
+                        <li>{{ invoice_guarantee_payment_instructions|default('') }}</li>
+                    </ul>
+                </div>
+
+                <br>
+                <div class="text-right" >
+                    <input type="hidden" id="nn_token_done" name="nn_token_done" value="1" />
+                    <input type="hidden" id="nn_form_cancel_url" value="{{ cancel_url|default('') }}" />
+                    <input type="hidden" id="novalnet_cancel_payment_alert" value="{{ novalnet_cancel_payment_alert|default('') }}" />
+                    <button type="button" id="nn_invoiceguarantee_form_cancel" class="btn btn-secondary w-25">{{ novalnet_cancel_btn_label|default('') }}</button>
+                    <button type="submit" id="novalnet_invoice_guarantee_form_submit" value="submit" class="btn btn-success w-25" >{{ novalnet_submit_btn_label|default('') }}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+
+    <script src="https://cdn.novalnet.de/js/v2/NovalnetUtility.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(function() {
+            $('#nn_invoiceguarantee_form_cancel').on('click', function() {
+                var cancelUrl = $('#nn_form_cancel_url').val();
+                var alertText = $('#novalnet_cancel_payment_alert').val();
+
+                if (!cancelUrl) {
+                    cancelUrl = window.location.host;
+                }
+                if (!alertText) {
+                    alertText = "Do you really want to cancel the payment?";
+                }
+
+                var result = confirm(alertText);
+                if (result) {
+                    window.location.replace(cancelUrl);
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

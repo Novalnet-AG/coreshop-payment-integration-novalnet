@@ -1,0 +1,36 @@
+{% extends '@CoreShopFrontend/Checkout/thank-you.html.twig' %}
+
+
+{% block content %}
+
+    {{ parent() }}
+
+    {% if novalnet_comments is defined %}
+        <div class="row">
+            <div class="col-12 col-sm-8">
+                <div class="card card-smart">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            {{ 'Payment Details'|trans }}
+                        </h4>
+                    </div>
+                    <div class="card-body panel-payment-details">
+                        {% if checkout_js is defined and checkout_token is defined %}
+                            <style type="text/css">
+                                #bz-checkout-modal { position: fixed !important; }
+                            </style>
+                            <script src="{{ checkout_js|default('') }}" class="bz-checkout"
+                                data-token="{{ checkout_token|default('') }}">
+                            </script>
+                            <a href="javascript:bzCheckout.display();">Pay now with Barzahlen</a>
+                            <br>
+                        {% endif %}
+
+                        {{ novalnet_comments|default('') | raw}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
