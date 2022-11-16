@@ -1,0 +1,4 @@
+*** Changelog ***
+
+= 1.0.0 - 2022.11.16 =
+* New release: Payment bundle built with seamless payment experience with new v2 API structure and enhanced features 
